@@ -4,6 +4,7 @@ import { ActivitydbService } from '../core/activitydb.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { IActivity } from '../share/interfaces';
+import { ActivitycrudService } from '../core/activitycrud.service';
 
 @Component({
   selector: 'app-create',
@@ -16,7 +17,7 @@ export class CreatePage implements OnInit {
   activityForm: FormGroup;
   constructor(
     private router: Router,
-    private activitydbService: ActivitydbService,
+    private activitycrudService: ActivitycrudService,
     public toastController: ToastController
   ) { }
 
@@ -58,7 +59,7 @@ export class CreatePage implements OnInit {
     this.activity = this.activityForm.value;
     let nextKey = this.activity.name.trim();
     this.activity.id = nextKey;
-    this.activitydbService.setItem(nextKey, this.activity);
+    this.activitycrudService.create_Activity(this.activity);
     console.warn(this.activityForm.value);
   }
 }
